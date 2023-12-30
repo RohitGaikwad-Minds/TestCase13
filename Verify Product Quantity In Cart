@@ -1,0 +1,43 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ProductQuantityTest {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path_to_chromedriver.exe");
+
+        // Instantiate ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://automationexercise.com/");
+
+        // Add a product to the cart
+        WebElement addToCartButton = driver.findElement(By.xpath("//button[contains(text(), 'Add to Cart')]"));
+        addToCartButton.click();
+
+        // Navigate to the cart page
+        WebElement cartLink = driver.findElement(By.xpath("//a[@href='/cart']"));
+        cartLink.click();
+
+        // Find the product quantity element on the cart page
+        WebElement productQuantityElement = driver.findElement(By.xpath("//input[@name='quantity']"));
+
+        // Retrieve the text or value of the product quantity element
+        String productQuantity = productQuantityElement.getAttribute("value");
+
+        // Perform assertions or verifications
+        String expectedQuantity = "1";
+
+        if (productQuantity.equals(expectedQuantity)) {
+            System.out.println("Product quantity in cart is correct.");
+        } else {
+            System.out.println("Product quantity in cart is incorrect.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
